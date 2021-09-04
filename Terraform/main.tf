@@ -1,3 +1,6 @@
+terraform {
+  backend "azure"{}
+}
 provider "azurerm" {
  
    version = "~>2.0"
