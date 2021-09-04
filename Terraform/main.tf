@@ -1,5 +1,7 @@
 terraform {
-  backend "azure"{}
+  backend "azurerm" {
+    
+  }
 }
 provider "azurerm" {
  
