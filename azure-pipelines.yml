@@ -1,0 +1,41 @@
+
+trigger: none
+
+variables:
+  vmImageName: 'ubuntu-latest'
+  terraformVersion: 0.12.3
+  azureSubscriptionServiceConnectionName: 'jucoriol'
+  tfStateResourceGroupName: 'TestRG'
+  tfStateAzureStorageAccountSku: 'RA-GRS'
+  tfStateAzureStorageAccountName: 'test'
+  tfStateContainerName: 'dev.tfstate'
+  
+
+stages:
+  - stage: Dev
+    displayName: devstage
+    jobs:
+    # Common Module
+    - job: devjob
+      displayName: Deploy the Terraform devjob
+      pool:
+        vmImage: $(vmImageName)
+      steps:
+      - task: InstallSSHKey@0
+        displayName: 'Install an SSH key'
+        inputs:
+          knownHostsEntry: $(sshKnownHostsEntry)
+          sshPublicKey: $(sshPublicKey)
+          sshKeySecureFile: $(sshKeySecureFileName)
+      - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
+        displayName: 'Use Terraform latest'
+      - task: TerraformTaskV2@2
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/Terraform'
+          backendServiceArm: 'Dev (8f14efb9-d2f2-4ef8-aeb8-afe76bf837bc)'
+          backendAzureRmResourceGroupName: 'TestRG'
+          backendAzureRmStorageAccountName: 'azuredevopstestsa'
+          backendAzureRmContainerName: 'test'
+          backendAzureRmKey: 'dev.tfstate'
