@@ -21,12 +21,7 @@ stages:
       pool:
         vmImage: $(vmImageName)
       steps:
-      - task: InstallSSHKey@0
-        displayName: 'Install an SSH key'
-        inputs:
-          knownHostsEntry: $(sshKnownHostsEntry)
-          sshPublicKey: $(sshPublicKey)
-          sshKeySecureFile: $(sshKeySecureFileName)
+
       - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
         displayName: 'Use Terraform latest'
       - task: TerraformTaskV2@2
