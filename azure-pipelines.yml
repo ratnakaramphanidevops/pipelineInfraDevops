@@ -34,3 +34,21 @@ stages:
           backendAzureRmStorageAccountName: 'azuredevopstestsa'
           backendAzureRmContainerName: 'test'
           backendAzureRmKey: 'dev.tfstate'
+      - task: TerraformTaskV2@2
+        inputs:
+          provider: 'azurerm'
+          command: 'validate'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/Terraform'
+      - task: TerraformTaskV2@2
+        inputs:
+          provider: 'azurerm'
+          command: 'plan'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/Terraform'
+          environmentServiceNameAzureRM: 'Dev (8f14efb9-d2f2-4ef8-aeb8-afe76bf837bc)'
+      
+      - task: TerraformTaskV2@2
+        inputs:
+          provider: 'azurerm'
+          command: 'apply'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/Terraform'
+          environmentServiceNameAzureRM: 'Dev (8f14efb9-d2f2-4ef8-aeb8-afe76bf837bc)'
