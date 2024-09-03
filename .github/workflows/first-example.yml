@@ -4,12 +4,12 @@ jobs:
    first_job:
          runs-on: ubuntu-latest
          steps: 
-           - name: Chekout Repo
-             uses: actions/checkout@v4
-           - name: List and Read files
-             run: |
+         - name: Chekout Repo
+           uses: actions/checkout@v4
+         - name: List and Read files
+           run: |
                 echo "my first github message"
                 ls -ltra
                 cat README.md   
-            - name: Generate ASCII Artwork
-              run: cowsay -f dragon "Run for cover, I am a Dragon" >> dragon.txt          
+         - name: Generate ASCII Artwork
+           run: cowsay -f dragon "Run for cover, I am a Dragon" >> dragon.txt          
