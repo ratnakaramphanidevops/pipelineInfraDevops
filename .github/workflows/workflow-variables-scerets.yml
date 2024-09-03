@@ -1,4 +1,4 @@
-name: cron varibales and secrets
+name: workflowdispatch varibales and secrets
 on: 
     workflow_dispatch: 
       
