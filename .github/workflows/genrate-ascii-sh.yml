@@ -3,6 +3,7 @@ on: push
 jobs:
    ascii_job:
          runs-on: ubuntu-latest
+         
          steps: 
          - name: Chekout Repo
            uses: actions/checkout@v4
@@ -11,6 +12,6 @@ jobs:
          - name: Executing shell script
            run: |
             chmod +x ascii-script.sh 
-            ./ ascii-script.sh
+             ./ ascii-script.sh
 
          
